@@ -1,27 +1,26 @@
 package shootgame.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import shootgame.model.AfterImage;
 import shootgame.model.Enemy;
 import shootgame.model.Game;
 import shootgame.model.GameImage;
-import shootgame.model.Launcher;
 import shootgame.model.SpaceShip;
+import shootgame.model.launcher.Launcher;
 
 public class GamingPanel extends JPanel{
 
-	private SpaceShip spaceShip;
-	
 	private Game game;
 	private int currentView = 0;
 	private int selected = 0;
+	private Font font = new Font("",50, 50);
 
 	public GamingPanel()
 	{
@@ -31,10 +30,6 @@ public class GamingPanel extends JPanel{
 		setSize(Game.WIDTH, Game.HEIGHT);
 		setFocusable(true);
 		
-		spaceShip = new SpaceShip(GameImage.getInstance().getImgMap().get("spaceShip"), 200, 800, 50, 50);
-		game.setSpaceShip(spaceShip);
-		spaceShip.init();
-
 		PaintThread paintThread = new PaintThread();
 		Thread thread1 = new Thread(paintThread);
 		thread1.start();
@@ -80,6 +75,18 @@ public class GamingPanel extends JPanel{
 					g.drawImage(img.getImgArray()[img.getIndex()], img.getPoint().x-img.getWidth()/2, img.getPoint().y-img.getHeight()/2
 							, img.getWidth(), img.getHeight(), null);
 				}
+				g.setColor(Color.RED);
+				g.setFont(font);
+				g.drawString("HP : " + Game.getInstance().getSpaceShip().getHP(), 0, 850);
+				
+				g.drawImage(GameImage.getInstance().getImgMap().get("nuclearMissile"), 600, 810, 50,50, null);
+				g.drawString("" + Game.getInstance().getSpaceShip().getNmCount(), 650, 850);
+				
+				g.drawImage(GameImage.getInstance().getImgMap().get("guidedMissile"), 700, 810, 50,50, null);
+				g.drawString("" + Game.getInstance().getSpaceShip().getGmCount(), 750, 850);
+				
+				g.drawString("" + Game.getInstance().getScore(), 700, 50);
+				
 			} catch(Exception e) {
 
 			}
@@ -145,7 +152,6 @@ public class GamingPanel extends JPanel{
 				} else if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 					if(selected==0){
 						System.out.println("Ω««‡¡ﬂ");
-						spaceShip.init();
 						game.gameStart();
 						currentView = 1;
 					} else if(selected==1) {

@@ -39,8 +39,8 @@ public class MachineGun extends Weapon{
 	{
 		Bullet bullet1 = new Bullet(GameImage.getInstance().getImgMap().get("bullet"), spaceShip.getPoint().x, spaceShip.getPoint().y, 10, 20, 0, -10, spaceShip);
 		Bullet bullet2 = new Bullet(GameImage.getInstance().getImgMap().get("bullet"), spaceShip.getPoint().x+spaceShip.getWidth()-10, spaceShip.getPoint().y, 10, 20, 0, -10, spaceShip);
-		Game.getInstance().getLauncherList().add(bullet1);
-		Game.getInstance().getLauncherList().add(bullet2);
+		Game.getInstance().addLauncher(bullet1);
+		Game.getInstance().addLauncher(bullet2);
 	}
 	
 	class AttackThread implements Runnable {

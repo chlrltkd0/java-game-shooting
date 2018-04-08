@@ -13,12 +13,15 @@ public class SpaceShip extends GameObject implements Observer{
 	private Wing wing;
 	private Booster booster;
 	private Weapon weapon;
-	private Game game;
+	private int gmCount = 100;
+	private int nmCount = 5;
 	
 	public SpaceShip(BufferedImage img, int x, int y, int width, int height) {
 		super(img, x, y, width, height, 0, 0);
-
-
+	}
+	
+	public int getHP() {
+		return body.getHp();
 	}
 	
 	public void init()
@@ -30,29 +33,55 @@ public class SpaceShip extends GameObject implements Observer{
 //		setWeapon(new RailGun(GameImage.getInstance().getImgMap().get("bullet"), "·¹ÀÏ°Ç", 20));
 	}
 	
-	
-	public Game getGame() {
-		return game;
+	public int getGmCount() {
+		return gmCount;
 	}
 
-	public void setGame(Game game) {
-		this.game = game;
+	public void setGmCount(int gmCount) {
+		this.gmCount = gmCount;
+	}
+
+	public void plusGmCount() {
+		this.gmCount++;
+	}
+	
+	public int getNmCount() {
+		return nmCount;
+	}
+
+	public void setNmCount(int nmCount) {
+		this.nmCount = nmCount;
+	}
+	
+	public void plusNmCount() {
+		this.nmCount++;
 	}
 
 	public void LaunchGuidedMissile() {
-		GuidedMissile guidedMissile = new GuidedMissile(GameImage.getInstance().getImgMap().get("guidedMissile"), point.x + 20, point.y, 50, 60, 0, -6, this);
-		this.game.getLauncherList().add(guidedMissile);
+		if(gmCount>0) {
+			gmCount--;
+			GuidedMissile guidedMissile = new GuidedMissile(GameImage.getInstance().getImgMap().get("guidedMissile"), point.x + 20, point.y, 50, 60, 0, -6, this);
+			Game.getInstance().addLauncher(guidedMissile);
+		}
 	}
 	
 
 	public void LaunchNuclearMissile() {
-		NuclearMissile nuclearMissile = new NuclearMissile(GameImage.getInstance().getImgMap().get("nuclearMissile"), point.x + 20, point.y, 70, 70, 0, -4, this);
-		this.game.getLauncherList().add(nuclearMissile);
+		if(nmCount>0) {
+			nmCount--;
+			NuclearMissile nuclearMissile = new NuclearMissile(GameImage.getInstance().getImgMap().get("nuclearMissile"), point.x + 20, point.y, 70, 70, 0, -4, this);
+			Game.getInstance().addLauncher(nuclearMissile);
+		}
 	}
 	
 	public void autoMove() {
-		point.x += xSpeed;
-		point.y += ySpeed;
+		int nextX = point.x + xSpeed;
+		int nextY = point.y + ySpeed;
+		if(nextX >= 0 && nextX <=Game.WIDTH-this.width)
+			point.x = nextX;
+		if(nextY >= 0 && nextY <=Game.HEIGHT-this.height)
+			point.y = nextY;
+		
 	}
 	
 	public Body getBody() {
@@ -97,8 +126,7 @@ public class SpaceShip extends GameObject implements Observer{
 		if(this.getBounds().intersects(obs.getBounds()))
 		{
 			this.getBody().minusHp(10);
-			if(getBody().getHp()<0)
-				this.game.getSpaceShip().setImg(null);
+			obs.die();
 		}
 	}
 }

@@ -4,9 +4,12 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+import shootgame.model.launcher.Launcher;
+
 public class Enemy extends GameObject implements Observer, Observee{
 	private int nextX;
 	private int hp;
+	private int score = 100;
 	private boolean autoMove = false;
 	protected List<Observer> observers = new LinkedList<>();
 	private Game game;
@@ -18,9 +21,11 @@ public class Enemy extends GameObject implements Observer, Observee{
 		this.autoMove = autoMove;
 		this.hp = hp;
 		addObserver(game.getSpaceShip());
-		for(int i=0; i<Game.getInstance().getLauncherList().size(); i++)
-		{
-			Game.getInstance().getLauncherList().get(i).addObserver(this);
+		addObserver(game);
+		synchronized(Game.getInstance().getLauncherList()) {
+			for(Launcher launcher : Game.getInstance().getLauncherList()){
+				launcher.addObserver(this);
+			}
 		}
 	}
 
@@ -34,7 +39,7 @@ public class Enemy extends GameObject implements Observer, Observee{
 				xSpeed = -3;
 			
 			if(point.x >= nextX-10 && point.x <= nextX+10)
-				nextX = (int)(Math.random()*800); // 800은 맵의 넓이이기때문에 어떻게 잘 만들어줘야한다.
+				nextX = (int)(Math.random()*Game.WIDTH); // 800은 맵의 넓이이기때문에 어떻게 잘 만들어줘야한다.
 		}
 		
 		moveX(xSpeed);
@@ -50,14 +55,16 @@ public class Enemy extends GameObject implements Observer, Observee{
 		
 		if(launcher.getBounds().intersects(this.getBounds())) {
 			this.hp -= launcher.getDamage();
-			if(hp < 0)
-			{
-				this.game.getEnemyList().remove(this);
-				this.game.getAfterImageList().add(new AfterImage(point, System.currentTimeMillis(), width, height, 25, GameImage.getInstance().getExplosionArray()));
-			}
-
+			if(hp <= 0)
+				die();
 			launcher.collision();
 		}
+	}
+	
+	public void die() {
+		this.game.plusPoint(score);
+		this.game.removeEnemy(this);
+		this.game.getAfterImageList().add(new AfterImage(point, System.currentTimeMillis(), width, height, 25, GameImage.getInstance().getExplosionArray()));
 	}
 
 	@Override
@@ -68,19 +75,24 @@ public class Enemy extends GameObject implements Observer, Observee{
 
 	@Override
 	public void addObserver(Observer o) {
-		observers.add(o);
+		synchronized(observers) {
+			observers.add(o);
+		}
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-		observers.remove(o);
+		synchronized(observers) {
+			observers.remove(o);
+		}
 	}
 
 	@Override
 	public void notifyObserver() {
-		for(Observer ob : observers)
-		{
-			ob.update(this);
+		synchronized(observers) {
+			for(Observer ob : observers)
+				ob.update(this);
 		}
+
 	}
 }

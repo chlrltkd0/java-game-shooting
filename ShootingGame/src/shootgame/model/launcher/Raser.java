@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 
 import shootgame.model.Game;
 import shootgame.model.GameObject;
-import shootgame.model.Launcher;
 
 public class Raser extends Launcher {
 

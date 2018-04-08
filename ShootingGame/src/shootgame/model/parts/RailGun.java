@@ -18,11 +18,11 @@ public class RailGun extends Weapon {
 	public void startAttack()
 	{
 		this.raser = new Raser(GameImage.getInstance().getImgMap().get("raser"), this.spaceShip);
-		Game.getInstance().getLauncherList().add(raser);
+		Game.getInstance().addLauncher(raser);
 	}
 
 	public void stopAttack()
 	{
-		Game.getInstance().getLauncherList().remove(raser);
+		Game.getInstance().removeLauncher(raser);
 	}
 }

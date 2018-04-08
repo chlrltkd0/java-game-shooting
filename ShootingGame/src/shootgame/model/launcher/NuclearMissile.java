@@ -7,7 +7,6 @@ import shootgame.model.AfterImage;
 import shootgame.model.Game;
 import shootgame.model.GameImage;
 import shootgame.model.GameObject;
-import shootgame.model.Launcher;
 
 public class NuclearMissile extends Launcher {
 

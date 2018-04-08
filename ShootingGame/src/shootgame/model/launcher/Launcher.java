@@ -1,8 +1,14 @@
-package shootgame.model;
+package shootgame.model.launcher;
 
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
+
+import shootgame.model.Enemy;
+import shootgame.model.Game;
+import shootgame.model.GameObject;
+import shootgame.model.Observee;
+import shootgame.model.Observer;
 
 public class Launcher extends GameObject implements Observee{
 	
@@ -15,14 +21,15 @@ public class Launcher extends GameObject implements Observee{
 		this.damage = damage;
 		this.owner = owner;
 		this.observers.add(Game.getInstance());
-		for(int i=0; i<Game.getInstance().getEnemyList().size(); i++)
-		{
-			this.observers.add(Game.getInstance().getEnemyList().get(i));
+		
+		synchronized(Game.getInstance().getEnemyList()) {
+			for(Enemy enemy : Game.getInstance().getEnemyList())
+				addObserver(enemy);
 		}
 	}
 	
 	public void collision() {
-		Game.getInstance().getLauncherList().remove(this);
+		Game.getInstance().removeLauncher(this);
 	}
 	
 	public void autoMove() {
@@ -41,19 +48,24 @@ public class Launcher extends GameObject implements Observee{
 	
 	@Override
 	public void addObserver(Observer o) {
-		observers.add(o);
+		synchronized(observers){
+			observers.add(o);
+		}
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-		observers.remove(o);
+		synchronized(observers){
+			observers.remove(o);
+		}
 	}
 
 	@Override
 	public void notifyObserver() {
-		for(Observer ob : observers)
-		{
-			ob.update(this);
+		synchronized(observers){
+			for(Observer ob : observers)
+				ob.update(this);
 		}
+
 	}
 }

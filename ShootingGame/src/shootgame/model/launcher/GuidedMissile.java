@@ -6,7 +6,6 @@ import shootgame.model.AfterImage;
 import shootgame.model.Game;
 import shootgame.model.GameImage;
 import shootgame.model.GameObject;
-import shootgame.model.Launcher;
 
 public class GuidedMissile extends Launcher {
 
@@ -50,7 +49,7 @@ public class GuidedMissile extends Launcher {
 	@Override
 	public void collision()
 	{
-		Game.getInstance().getLauncherList().remove(this);
+		Game.getInstance().removeLauncher(this);
 		Game.getInstance().getAfterImageList().add(new AfterImage(point, System.currentTimeMillis(), width, height, 25, GameImage.getInstance().getExplosionArray()));
 	}
 }
