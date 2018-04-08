@@ -3,7 +3,13 @@ package shootgame.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import shootgame.model.enemy.Enemy;
+import shootgame.model.enemy.EnemyGenerator;
+import shootgame.model.image.AfterImage;
+import shootgame.model.image.AfterImageProcess;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Launcher;
+import shootgame.model.spaceship.SpaceShip;
 
 public class Game implements Observer {
 	public static final int WIDTH = 870;

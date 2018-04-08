@@ -1,9 +1,10 @@
-package shootgame.model;
+package shootgame.model.shop;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import shootgame.model.parts.Equipment;
+import shootgame.model.spaceship.SpaceShip;
+import shootgame.model.spaceship.parts.Equipment;
 
 public class ItemStorage {
 	private SpaceShip spaceShip;

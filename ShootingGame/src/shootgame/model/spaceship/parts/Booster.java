@@ -1,4 +1,4 @@
-package shootgame.model.parts;
+package shootgame.model.spaceship.parts;
 
 public class Booster {
 	private int speed;

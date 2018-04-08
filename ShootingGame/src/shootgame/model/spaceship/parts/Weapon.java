@@ -1,7 +1,8 @@
-package shootgame.model.parts;
+package shootgame.model.spaceship.parts;
 
 import java.awt.image.BufferedImage;
-import shootgame.model.SpaceShip;
+
+import shootgame.model.spaceship.SpaceShip;
 
 public abstract class Weapon extends Equipment {
 	

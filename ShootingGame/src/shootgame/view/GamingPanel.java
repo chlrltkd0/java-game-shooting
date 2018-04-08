@@ -8,12 +8,12 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import shootgame.model.AfterImage;
-import shootgame.model.Enemy;
 import shootgame.model.Game;
-import shootgame.model.GameImage;
-import shootgame.model.SpaceShip;
+import shootgame.model.enemy.Enemy;
+import shootgame.model.image.AfterImage;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Launcher;
+import shootgame.model.spaceship.SpaceShip;
 
 public class GamingPanel extends JPanel{
 

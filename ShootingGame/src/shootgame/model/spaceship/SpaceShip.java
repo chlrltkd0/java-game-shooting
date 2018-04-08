@@ -1,11 +1,16 @@
-package shootgame.model;
+package shootgame.model.spaceship;
 
 import java.awt.image.BufferedImage;
 
+import shootgame.model.Game;
+import shootgame.model.GameObject;
+import shootgame.model.Observer;
+import shootgame.model.enemy.Enemy;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Bullet;
 import shootgame.model.launcher.GuidedMissile;
 import shootgame.model.launcher.NuclearMissile;
-import shootgame.model.parts.*;
+import shootgame.model.spaceship.parts.*;
 
 public class SpaceShip extends GameObject implements Observer{
 	

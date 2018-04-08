@@ -4,11 +4,11 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
-import shootgame.model.Enemy;
 import shootgame.model.Game;
 import shootgame.model.GameObject;
 import shootgame.model.Observee;
 import shootgame.model.Observer;
+import shootgame.model.enemy.Enemy;
 
 public class Launcher extends GameObject implements Observee{
 	

@@ -3,7 +3,7 @@ package shootgame.model.launcher;
 import java.awt.image.BufferedImage;
 
 import shootgame.model.Game;
-import shootgame.model.SpaceShip;
+import shootgame.model.spaceship.SpaceShip;
 
 public class Bullet extends Launcher{
 

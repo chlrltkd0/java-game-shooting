@@ -1,4 +1,7 @@
-package shootgame.model;
+package shootgame.model.enemy;
+
+import shootgame.model.Game;
+import shootgame.model.image.GameImage;
 
 public class EnemyGenerator implements Runnable{
 	

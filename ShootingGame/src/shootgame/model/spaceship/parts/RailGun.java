@@ -1,9 +1,9 @@
-package shootgame.model.parts;
+package shootgame.model.spaceship.parts;
 
 import java.awt.image.BufferedImage;
 
 import shootgame.model.Game;
-import shootgame.model.GameImage;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Raser;
 
 public class RailGun extends Weapon {

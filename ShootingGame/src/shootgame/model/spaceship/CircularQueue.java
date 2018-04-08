@@ -1,4 +1,4 @@
-package shootgame.model;
+package shootgame.model.spaceship;
 
 public class CircularQueue<T> {
 	private int head;

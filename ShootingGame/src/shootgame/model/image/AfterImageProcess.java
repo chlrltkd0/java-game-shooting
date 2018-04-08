@@ -1,6 +1,8 @@
-package shootgame.model;
+package shootgame.model.image;
 
 import java.util.List;
+
+import shootgame.model.Game;
 
 public class AfterImageProcess implements Runnable {
 

@@ -1,9 +1,15 @@
-package shootgame.model;
+package shootgame.model.enemy;
 
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+import shootgame.model.Game;
+import shootgame.model.GameObject;
+import shootgame.model.Observee;
+import shootgame.model.Observer;
+import shootgame.model.image.AfterImage;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Launcher;
 
 public class Enemy extends GameObject implements Observer, Observee{

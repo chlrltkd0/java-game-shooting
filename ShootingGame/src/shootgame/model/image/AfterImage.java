@@ -1,4 +1,4 @@
-package shootgame.model;
+package shootgame.model.image;
 
 import java.awt.Point;
 import java.awt.image.BufferedImage;

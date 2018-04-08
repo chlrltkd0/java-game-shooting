@@ -1,11 +1,11 @@
-package shootgame.model.parts;
+package shootgame.model.spaceship.parts;
 
 import java.awt.image.BufferedImage;
 
 import shootgame.model.Game;
-import shootgame.model.GameImage;
-import shootgame.model.SpaceShip;
+import shootgame.model.image.GameImage;
 import shootgame.model.launcher.Bullet;
+import shootgame.model.spaceship.SpaceShip;
 
 public class MachineGun extends Weapon{
 

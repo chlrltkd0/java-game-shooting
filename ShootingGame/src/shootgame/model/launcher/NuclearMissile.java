@@ -3,10 +3,10 @@ package shootgame.model.launcher;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
-import shootgame.model.AfterImage;
 import shootgame.model.Game;
-import shootgame.model.GameImage;
 import shootgame.model.GameObject;
+import shootgame.model.image.AfterImage;
+import shootgame.model.image.GameImage;
 
 public class NuclearMissile extends Launcher {
 
